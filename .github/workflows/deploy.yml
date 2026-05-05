@@ -23,7 +23,7 @@ jobs:
 
       - name: Create Firebase config file
         run: |
-          cat > assignment-3/firebase.config.js <<EOF
+          cat > firebase.config.js <<EOF
           export const FIREBASE_CONFIG = {
             apiKey: "${{ secrets.APIKEY }}",
             authDomain: "${{ secrets.AUTHDOMAIN }}",
@@ -46,7 +46,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: assignment-3
+          path: .
 
       - name: Deploy to GitHub Pages
         id: deployment
