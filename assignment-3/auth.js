@@ -44,20 +44,6 @@ async function handleSignOut() {
 }
 
 function setupAuth(startAdmin) {
-  const signInBtn = document.getElementById("signInBtn");
-  const signOutBtn = document.getElementById("signOutBtn");
-
-  console.log("signInBtn:", signInBtn);
-  console.log("signOutBtn:", signOutBtn);
-
-  if (!signInBtn || !signOutBtn) {
-    console.error("Auth buttons not found in HTML");
-    return;
-  }
-
-  signInBtn.addEventListener("click", handleSignIn);
-  signOutBtn.addEventListener("click", handleSignOut);
-
   onAuthStateChanged(auth, async user => {
     console.log("Auth state changed:", user);
 
