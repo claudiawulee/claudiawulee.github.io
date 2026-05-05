@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Admin - McGraw Tutoring Tracker</title>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site-header">
+  <div id="navbar-container"></div>
+  <div id="dashboardMenu" class="sub-nav hidden" aria-label="Dashboard sessions">
+    <!-- session links rendered by navbar.js -->
+  </div>
+</header>
+
+    <header>
+      <h1>Admin - McGraw Tutoring Tracker</h1>
+    </header>
+
+    <div id="authGate">
+      <p id="authMessage">Please sign in with Google to access the admin page.</p>
+      <button id="signInBtn">Sign in with Google</button>
+      <button id="signOutBtn">Sign out</button>
+    </div>
+
+    <div id="adminContent" style="display: none;">
+      <main class="grid"></main>
+
+      <footer>
+        <button class="secondary" onclick="resetAll()">Reset all to 0</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="classes.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
