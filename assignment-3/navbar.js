@@ -146,24 +146,28 @@ function setupAuthButtons() {
   });
 
   onAuthStateChanged(auth, user => {
-  const currentPage = getCurrentPage();
+    const currentPage = getCurrentPage();
 
-  // Hide sign in/out on dashboard and admin
-  if (currentPage !== "chat") {
-    signInBtn.style.display = "none";
-    signOutBtn.style.display = "none";
-    return;
-  }
+    // Dashboard/home: hide sign in/out buttons
+    if (currentPage === "home" || currentPage === "dashboard") {
+      signInBtn.style.display = "none";
+      signOutBtn.style.display = "none";
+      return;
+    }
 
-  // Only show auth buttons on chat page
-  if (user) {
-    signInBtn.style.display = "none";
-    signOutBtn.style.display = "inline-flex";
-  } else {
-    signInBtn.style.display = "inline-flex";
-    signOutBtn.style.display = "none";
-  }
-});
+    // Admin: only show Sign Out if signed in
+    if (currentPage === "admin") {
+      signInBtn.style.display = "none";
+      signOutBtn.style.display = user ? "inline-flex" : "none";
+      return;
+    }
+
+    // Chat: show Sign In / Sign Out normally
+    if (currentPage === "chat") {
+      signInBtn.style.display = user ? "none" : "inline-flex";
+      signOutBtn.style.display = user ? "inline-flex" : "none";
+    }
+  });
 }
 
 function setupAdminVisibility() {
