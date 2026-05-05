@@ -23,7 +23,7 @@ jobs:
 
       - name: Create Firebase config file
         run: |
-          cat > firebase.config.js <<EOF
+          cat > assignment-3/firebase.config.js <<EOF
           export const FIREBASE_CONFIG = {
             apiKey: "${{ secrets.APIKEY }}",
             authDomain: "${{ secrets.AUTHDOMAIN }}",
