@@ -37,8 +37,8 @@ jobs:
 
       - name: Confirm Firebase config exists
         run: |
-          ls -la
-          test -f firebase.config.js
+          ls -la assignment-3
+          test -f assignment-3/firebase.config.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
