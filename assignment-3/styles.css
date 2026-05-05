@@ -9,6 +9,7 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* NAVBAR */
 .site-header {
   width: 100%;
   background: #f7f4ee;
@@ -19,25 +20,21 @@ h1 {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 24px 24px 28px;
-  min-height: 40px;
+  padding: 16px 24px;
+  min-height: 86px;
 }
 
-/* left side */
-.nav-left {
+.nav-left,
+.nav-right {
   display: flex;
-  gap: 20px;
   align-items: center;
+  gap: 16px;
 }
 
-/* right side (sign in) */
 .nav-right {
   margin-left: auto;
-  display: flex;
-  align-items: center;
 }
 
-/* center logo */
 .nav-center {
   position: absolute;
   left: 50%;
@@ -46,9 +43,10 @@ h1 {
   align-items: center;
 }
 
-/* logo size */
 .nav-logo {
-  height: clamp(50px, 5vw, 80px);
+  height: 70px;
+  width: auto;
+  display: block;
 }
 
 .nav-link {
@@ -58,7 +56,7 @@ h1 {
   padding: 0;
   color: #1f1f1f;
   font-family: inherit;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -86,13 +84,18 @@ h1 {
   text-align: center;
 }
 
+.signout-btn {
+  white-space: nowrap;
+}
+
+/* SESSION DROPDOWN */
 .sub-nav {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: clamp(12px, 4vw, 45px);
-  padding: 28px 40px;
+  padding: 20px;
   background: #ebe7df;
   border-top: 1px solid #d8d1c4;
 }
@@ -107,10 +110,11 @@ h1 {
   padding: 0;
   color: #3a3a3a;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-style: italic;
   font-weight: 500;
   letter-spacing: 0.03em;
+  text-align: center;
   cursor: pointer;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
@@ -123,39 +127,6 @@ h1 {
 .session-link.active {
   color: #d98900;
   font-weight: 700;
-}
-
-.signout-btn {
-  white-space: nowrap;
-}
-
-@media (max-width: 900px) {
-  .main-nav {
-    flex-direction: column;
-    align-items: center;
-    padding: 18px 20px;
-  }
-
-  .nav-left,
-  .nav-right {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
-  }
-
-  .sub-nav {
-    padding: 20px;
-    gap: 16px;
-  }
-
-  .nav-link {
-    font-size: 0.95rem;
-  }
-
-  .session-link {
-    font-size: 0.95rem;
-    text-align: center;
-  }
 }
 
 /* TABS */
@@ -188,27 +159,17 @@ h1 {
   gap: 20px;
   padding: 16px;
   margin-top: 32px;
-
-  /* for mobile: 2 cards per row*/
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* for larger screens: 3 cards per row */
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 28px; /* more breathing room on bigger screens */
-  }
-}
-
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
+    gap: 28px;
   }
 }
 
 /* CARDS + AUTH */
-
 #signInBtn,
 #signOutBtn {
   background: white;
@@ -228,17 +189,12 @@ h1 {
   display: block;
   text-decoration: none;
   color: inherit;
-
   background: white;
   padding: 28px 24px;
   border-radius: 18px;
   min-height: 180px;
-
-  /* IMPORTANT */
-  overflow: hidden; /* keep this for overlay clipping */
-
+  overflow: hidden;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
-
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -254,21 +210,20 @@ h1 {
 
 .card-overlay {
   position: absolute;
-  inset: 0; /* fills entire card */
-
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-
   opacity: 0;
-  transition: opacity 0.25s ease;
-  letter-spacing: 0.08em;
-
-  border-radius: 16px;
+  border-radius: 18px;
   z-index: 2;
+  transition: opacity 0.25s ease;
 }
 
-/* tinted overlays by status */
+.card:hover .card-overlay {
+  opacity: 1;
+}
+
 .card.green .card-overlay {
   background: rgba(71, 222, 127, 0.468);
 }
@@ -285,12 +240,6 @@ h1 {
   background: rgba(107, 114, 128, 0.22);
 }
 
-/* Shows the shadow overlay */
-.card:hover .card-overlay {
-  opacity: 1;
-}
-
-
 .overlay-text {
   color: white;
   font-size: 1.8rem;
@@ -298,13 +247,6 @@ h1 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-
-/* slightly dim underlying content on hover */
-.card-content {
-  transition: filter 0.25s ease;
-}
-
-
 
 /* ROOM STATUS */
 .room-title {
@@ -335,18 +277,13 @@ h1 {
   color: #7f8c8d;
 }
 
-
-
 .count {
-  font-size: 1rem;
   display: flex;
   justify-content: space-between;
   margin: 8px 0;
   padding: 8px;
   background: #f8fafc;
   border-radius: 6px;
-}
-.count{
   font-size: 1.15rem;
   font-weight: 700;
 }
@@ -452,6 +389,7 @@ h1 {
   margin-top: 30px;
 }
 
+/* SESSION BANNER */
 .session-banner {
   text-align: center;
   font-weight: 700;
@@ -461,9 +399,53 @@ h1 {
 }
 
 .session-banner.active {
-  color: #16a34a; /* green */
+  color: #16a34a;
 }
 
 .session-banner.next {
-  color: #d97706; /* orange */
+  color: #d97706;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  body {
+    padding: 12px;
+  }
+
+  .main-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-height: auto;
+    padding: 16px 20px;
+  }
+
+  .nav-center {
+    position: static;
+    transform: none;
+    order: 1;
+  }
+
+  .nav-left {
+    order: 2;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .nav-right {
+    order: 3;
+    margin-left: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .nav-logo {
+    height: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
