@@ -3,6 +3,7 @@ name: Deploy
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -10,8 +11,11 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repo
@@ -19,7 +23,7 @@ jobs:
 
       - name: Create Firebase config file
         run: |
-          cat > firebase.config.js <<EOF
+          cat > ./firebase.config.js <<EOF
           export const FIREBASE_CONFIG = {
             apiKey: "${{ secrets.APIKEY }}",
             authDomain: "${{ secrets.AUTHDOMAIN }}",
@@ -27,26 +31,23 @@ jobs:
             projectId: "${{ secrets.PROJECTID }}",
             storageBucket: "${{ secrets.STORAGEBUCKET }}",
             messagingSenderId: "${{ secrets.MESSAGINGSENDERID }}",
-            appId: "${{ secrets.APPID }}",
+            appId: "${{ secrets.APPID }}"
           };
           EOF
+
+      - name: Confirm Firebase config exists
+        run: |
+          ls -la
+          test -f firebase.config.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: .
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
